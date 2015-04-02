@@ -4,10 +4,23 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var proxy = require('proxy-express');
 var path = require('path');
+var http = require('http');
+var https = require('https');
+var secure = require('express-secure-only');
+var url = require('url');
+var fs = require('fs');
 
 var config = {
+  'host': process.env.HOST,
   'target': process.env.TARGET,
-  'port': process.env.PORT,
+  'targetScheme': process.env.TARGET_SCHEME,
+  'httpPort': process.env.HTTP_PORT,
+  'httpsPort': process.env.HTTPS_PORT,
+  'httpsOptions': {
+    'key': fs.readFileSync(process.env.KEY_FILE),
+    'cert': fs.readFileSync(process.env.CERT_FILE),
+    'force': process.env.HTTPS_FORCE
+  },
   'dbUri': process.env.DB_URI,
   'sessionSecret': process.env.SESSION_SECRET,
   'oAuthClientId': process.env.OAUTH_CLIENT_ID,
@@ -27,10 +40,17 @@ var app = express();
 var passport = require('passport'),
   WordpressStrategy = require('passport-wordpress-oauth-server').Strategy;
 
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/auth/wordpress');
+}
+
 app.use(cookieParser());
 app.use(session({ secret: config.sessionSecret }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+if (config.httpsOptions.force) { app.use(secure()); }
 
 passport.serializeUser(function(user, done) {
     done(null, user._id);
@@ -90,13 +110,12 @@ app.get('/logout', function(req, res){
 
 app.use(proxy(config.target, {
   pre: function(proxyObj, callback) {
+    console.log(proxyObj.reqOpts.url);
+    proxyObj.reqOpts.url = url.resolve(config.targetScheme + '://' + config.target, proxyObj.req.url);
+    console.log(proxyObj.reqOpts.url);
     ensureAuthenticated(proxyObj.req, proxyObj.res, callback);
   }
 }));
 
-app.listen(config.port);
-
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/auth/wordpress');
-}
+http.createServer(app).listen(config.httpPort);
+https.createServer(config.httpsOptions, app).listen(config.httpsPort);

@@ -1,8 +1,14 @@
 FROM node
 EXPOSE 80
 
-ENV TARGET http://localhost:5000
-ENV PORT 80
+ENV HOST example.com
+ENV TARGET localhost
+ENV TARGET_SCHEME http
+ENV HTTP_PORT 80
+ENV HTTPS_PORT 443
+ENV HTTPS_FORCE false
+ENV KEY_FILE server.key
+ENV CERT_FILE server.crt
 ENV DB_URI mongodb://localhost/auth
 ENV SESSION_SECRET changeme
 ENV OAUTH_CLIENT_ID changeme

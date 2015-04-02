@@ -3,3 +3,5 @@ docker-compose.example.yml
 .git
 .gitignore
 .envrc
+server.crt
+server.key

@@ -1,4 +1,6 @@
 docker-compose.yml
 .envrc
-
 node_modules/
+server.crt
+server.key
+*.swp

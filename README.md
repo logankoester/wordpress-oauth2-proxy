@@ -40,17 +40,22 @@ authenticated clients.
 Copy `docker-compose.example.yml` into your project, and adjust the environment
 variables as appropriate, then run `docker-compose up`.
 
-Variable | Explanation
----------|------------
-TARGET | The internal URI of the service to expose through the
-authenticated proxy. Typically an exposed port on a linked image.
-DB_URI | A MongoDB database (by default running in a linked container)
-SESSION_SECRET | Change this to any random string
-OAUTH_CLIENT_ID | The **Client ID** you created in Wordpress.
+Variable            | Explanation
+--------------------|------------
+HOST                | The external hostname for your service
+TARGET              | The internal hostname of the service to expose through the authenticated proxy. Commonly a linked image.
+TARGET_SCHEME       | "http" or "https"
+HTTP_PORT           | Default: 80
+HTTPS_PORT          | Default: 443
+HTTPS_FORCE         | Enable to redirect all non-https requests
+KEY_FILE            | Path to a TLS certificate key
+CERT_FILE           | Path to a TLS certificate
+DB_URI              | A MongoDB database (by default running in a linked container)
+SESSION_SECRET      | Change this to any random string
+OAUTH_CLIENT_ID     | The **Client ID** you created in Wordpress.
 OAUTH_CLIENT_SECRET | The **Secret** you created in Wordpress.
-OAUTH_URL | The `SITEURL` of the Wordpress instance.
-OAUTH_CALLBACK_URL | Prefix with the external URI of your service (such as a CNAME
-pointing to this Docker host). The `/auth/wordpress/callback` route is handled by `wordpress-oauth2-proxy`.
+OAUTH_URL           | The `SITEURL` of the Wordpress instance.
+OAUTH_CALLBACK_URL  | Prefix with the external URI of your service (such as a CNAME pointing to this Docker host). The `/auth/wordpress/callback` route is handled by `wordpress-oauth2-proxy`.
 
 > Make sure that TARGET is not publicly accessible, or
 > unauthenticated users can simply ignore your reverse proxy!
@@ -58,3 +63,21 @@ pointing to this Docker host). The `/auth/wordpress/callback` route is handled b
 With the proxy up and running, ppen the site in your browser, and verify the login process.
 
 You're done!
+
+## Hacking
+
+You will need `docker` and `docker-compose` installed.
+
+```bash
+$ git clone git@github.com:logankoester/wordpress-oauth2-proxy.git
+$ cd wordpress-oauth2-proxy
+$ mv docker-compose.example.yml docker-compose.yml
+
+# Modify docker-compose.yml for your environment...
+
+$ docker-compose up
+```
+
+## Author
+
+Copyright (c) 2015 [Logan Koester](http://logankoester.com). Released under the MIT license. See `LICENSE` for details.
