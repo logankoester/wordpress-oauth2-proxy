@@ -60,7 +60,7 @@ OAUTH_CALLBACK_URL  | Prefix with the external URI of your service (such as a CN
 > Make sure that TARGET is not publicly accessible, or
 > unauthenticated users can simply ignore your reverse proxy!
 
-With the proxy up and running, ppen the site in your browser, and verify the login process.
+With the proxy up and running, open the site in your browser, and verify the login process.
 
 You're done!
 
