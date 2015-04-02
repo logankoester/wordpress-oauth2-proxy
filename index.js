@@ -110,9 +110,7 @@ app.get('/logout', function(req, res){
 
 app.use(proxy(config.target, {
   pre: function(proxyObj, callback) {
-    console.log(proxyObj.reqOpts.url);
     proxyObj.reqOpts.url = url.resolve(config.targetScheme + '://' + config.target, proxyObj.req.url);
-    console.log(proxyObj.reqOpts.url);
     ensureAuthenticated(proxyObj.req, proxyObj.res, callback);
   }
 }));
