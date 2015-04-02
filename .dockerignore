@@ -1,0 +1,5 @@
+docker-compose.yml
+docker-compose.example.yml
+.git
+.gitignore
+.envrc

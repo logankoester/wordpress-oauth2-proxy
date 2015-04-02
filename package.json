@@ -1,0 +1,36 @@
+{
+  "name": "wordpress-oauth2-proxy",
+  "version": "1.0.0",
+  "description": "A reverse proxy using WP OAuth Server as an authentication scheme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/logankoester/wordpress-oauth2-proxy"
+  },
+  "keywords": [
+    "wordpress",
+    "reverse",
+    "proxy",
+    "authentication",
+    "oauth",
+    "docker"
+  ],
+  "author": "Logan Koester <logan@logankoester.com> (http://logankoester.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/logankoester/wordpress-oauth2-proxy/issues"
+  },
+  "homepage": "https://github.com/logankoester/wordpress-oauth2-proxy",
+  "dependencies": {
+    "cookie-parser": "^1.3.4",
+    "express": "^4.12.3",
+    "express-session": "^1.10.4",
+    "mongoose": "^4.0.1",
+    "passport": "^0.2.1",
+    "passport-wordpress-oauth-server": "^0.2.0",
+    "proxy-express": "^1.0.1"
+  }
+}

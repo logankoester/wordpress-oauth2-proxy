@@ -1,0 +1,23 @@
+auth:
+  image: "logankoester/wordpress-oauth2-proxy"
+  ports:
+    - "80:80"
+  environment:
+    TARGET_URI: "private_service"
+    DB_URI: "mongodb://mongo/auth"
+    SESSION_SECRET: "SOME RANDOM STRING"
+    OAUTH_CLIENT_ID: "YOUR CLIENT ID FROM WORDPRESS"
+    OAUTH_CLIENT_SECRET: "YOUR CLIENT SECRET FROM WORDPRESS"
+    OAUTH_URL: "YOUR WORDPRESS SITEURL"
+    OAUTH_CALLBACK_URL: "http://private_service.example.com/auth/wordpress/callback"
+  links:
+    - "mongo"
+    - "private_service"
+
+mongo:
+  image: "mongo"
+
+private_service:
+  image: "YOUR PRIVATE SERVICE"
+  expose:
+    - "80"
