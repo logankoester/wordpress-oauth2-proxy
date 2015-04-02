@@ -1,5 +1,6 @@
 FROM node
 EXPOSE 80
+EXPOSE 433
 
 ENV HOST example.com
 ENV TARGET localhost
