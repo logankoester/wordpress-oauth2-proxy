@@ -109,6 +109,10 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
+app.get('/', function(req, res){
+  res.redirect('/ui/');
+});
+
 app.use(proxy(config.target, {
   request: {
     prepend: config.targetPrepend
