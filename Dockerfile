@@ -19,4 +19,5 @@ ENV OAUTH_CALLBACK_URL https://service.example/auth/wordpress/callback
 
 ADD . /usr/src/wordpress-oauth2-proxy
 WORKDIR /usr/src/wordpress-oauth2-proxy
+RUN npm install
 ENTRYPOINT ["node", "index.js"]
