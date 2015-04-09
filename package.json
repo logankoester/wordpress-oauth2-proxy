@@ -32,6 +32,6 @@
     "mongoose": "^4.0.1",
     "passport": "^0.2.1",
     "passport-wordpress-oauth-server": "^0.2.0",
-    "proxy-express": "^1.0.1"
+    "proxy-express": "^1.1.1"
   }
 }
