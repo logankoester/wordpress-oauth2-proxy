@@ -1,22 +1,21 @@
 FROM node
-EXPOSE 80
-EXPOSE 433
+EXPOSE 80 433
 
-ENV HOST example.com
-ENV TARGET localhost
-ENV TARGET_SCHEME http
-ENV TARGET_PREPEND ""
-ENV HTTP_PORT 80
-ENV HTTPS_PORT 443
-ENV HTTPS_FORCE false
-ENV KEY_FILE server.key
-ENV CERT_FILE server.crt
-ENV DB_URI mongodb://localhost/auth
-ENV SESSION_SECRET changeme
-ENV OAUTH_CLIENT_ID changeme
-ENV OAUTH_CLIENT_SECRET changeme
-ENV OAUTH_URL https://wordpress.example
-ENV OAUTH_CALLBACK_URL https://service.example/auth/wordpress/callback
+ENV HOST="example.com" \
+    TARGET="localhost" \
+    TARGET_SCHEME="http" \
+    TARGET_PREPEND="" \
+    HTTP_PORT="80" \
+    HTTPS_PORT="443" \
+    HTTPS_FORCE="false" \
+    KEY_FILE="server.key" \
+    CERT_FILE="server.crt" \
+    DB_URI="mongodb://localhost/auth" \
+    SESSION_SECRET="changeme" \
+    OAUTH_CLIENT_ID="changeme" \
+    OAUTH_CLIENT_SECRET="changeme" \
+    OAUTH_URL="https://wordpress.example" \
+    OAUTH_CALLBACK_URL="https://service.example/auth/wordpress/callback"
 
 ADD . /usr/src/wordpress-oauth2-proxy
 WORKDIR /usr/src/wordpress-oauth2-proxy
