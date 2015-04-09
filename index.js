@@ -14,6 +14,7 @@ var config = {
   'host': process.env.HOST,
   'target': process.env.TARGET,
   'targetScheme': process.env.TARGET_SCHEME,
+  'targetPrepend': process.env.TARGET_PREPEND,
   'httpPort': process.env.HTTP_PORT,
   'httpsPort': process.env.HTTPS_PORT,
   'httpsOptions': {
@@ -109,8 +110,12 @@ app.get('/logout', function(req, res){
 });
 
 app.use(proxy(config.target, {
+  request: {
+    prepend: config.targetPrepend
+  },
   pre: function(proxyObj, callback) {
-    proxyObj.reqOpts.url = url.resolve(config.targetScheme + '://' + config.target, proxyObj.req.url);
+    proxyObj.reqOpts.url = url.resolve(config.targetScheme + '://' +
+        config.target, config.targetPrepend + proxyObj.req.url);
     ensureAuthenticated(proxyObj.req, proxyObj.res, callback);
   }
 }));

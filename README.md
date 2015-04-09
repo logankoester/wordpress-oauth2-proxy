@@ -45,6 +45,7 @@ Variable            | Explanation
 HOST                | The external hostname for your service
 TARGET              | The internal hostname of the service to expose through the authenticated proxy. Commonly a linked image.
 TARGET_SCHEME       | "http" or "https"
+TARGET_PREPEND      | A path to be prepended to every request through the proxy
 HTTP_PORT           | Default: 80
 HTTPS_PORT          | Default: 443
 HTTPS_FORCE         | Enable to redirect all non-https requests

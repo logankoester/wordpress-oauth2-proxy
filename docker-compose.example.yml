@@ -7,6 +7,7 @@ auth:
     HOST: "private_service.example.com"
     TARGET_URI: "private_service"
     TARGET_SCHEME: "http"
+    TARGET_PREPEND: ""
     DB_URI: "mongodb://mongo/auth"
     SESSION_SECRET: "SOME RANDOM STRING"
     OAUTH_CLIENT_ID: "YOUR CLIENT ID FROM WORDPRESS"
