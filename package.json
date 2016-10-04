@@ -30,8 +30,8 @@
     "express-secure-only": "^0.2.1",
     "express-session": "^1.10.4",
     "mongoose": "^4.0.1",
-    "passport": "^0.2.1",
+    "passport": "^0.3.2",
     "passport-wordpress-oauth-server": "^0.2.0",
-    "proxy-express": "git://github.com/johnhof/proxy-express#master"
+    "proxy-express": "2.0.0"
   }
 }
