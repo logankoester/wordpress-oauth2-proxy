@@ -57,6 +57,8 @@ OAUTH_CLIENT_ID     | The **Client ID** you created in Wordpress.
 OAUTH_CLIENT_SECRET | The **Secret** you created in Wordpress.
 OAUTH_URL           | The `SITEURL` of the Wordpress instance.
 OAUTH_CALLBACK_URL  | Prefix with the external URI of your service (such as a CNAME pointing to this Docker host). The `/auth/wordpress/callback` route is handled by `wordpress-oauth2-proxy`.
+SECRET_TOKEN_HEADER | Optionally accept a secret token on this header for unauthenticated requests ($SECRET_TOKEN) (for example, `X-Gitlab-Token`)
+SECRET_TOKEN        | A secret token which must match $SECRET_TOKEN_HEADER if enabled and the request is not authenticated by oAuth.
 
 > Make sure that TARGET is not publicly accessible, or
 > unauthenticated users can simply ignore your reverse proxy!

@@ -27,7 +27,9 @@ var config = {
   'oAuthClientId': process.env.OAUTH_CLIENT_ID,
   'oAuthClientSecret': process.env.OAUTH_CLIENT_SECRET,
   'oAuthUrl': process.env.OAUTH_URL,
-  'oAuthCallbackUrl': process.env.OAUTH_CALLBACK_URL
+  'oAuthCallbackUrl': process.env.OAUTH_CALLBACK_URL,
+  'secretTokenHeader': process.env.SECRET_TOKEN_HEADER,
+  'secretToken': process.env.SECRET_TOKEN,
 };
 
 var User = mongoose.model('User', {
@@ -43,6 +45,12 @@ var passport = require('passport'),
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
+  if (config.secretTokenHeader) {
+    var secretToken = req.get(config.secretTokenHeader);
+    if (secretToken === config.secretToken) {
+      return next();
+    }
+  }
   res.redirect('/auth/wordpress');
 }
 
