@@ -17,6 +17,8 @@ auth:
     HTTPS_FORCE: false
     KEY_FILE: "server.key"
     CERT_FILE: "server.crt"
+    SECRET_TOKEN_HEADER: "X-Gitlab-Token"
+    SECRET_TOKEN: "YOUR SECURE RANDOM STRING"
   links:
     - "mongo"
     - "private_service"
