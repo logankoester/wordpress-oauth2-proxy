@@ -100,12 +100,12 @@ passport.use(new WordpressStrategy({
 ));
 
 app.get('/auth/wordpress',
-  passport.authenticate('wordpress-oauth-server'),
+  passport.authorize('wordpress-oauth-server'),
   function(req, res){
   });
 
 app.get('/auth/wordpress/callback', 
-  passport.authenticate('wordpress-oauth-server', {
+  passport.authorize('wordpress-oauth-server', {
     failureRedirect: '/failure'
   }), function(req, res){
     return res.redirect('/');
