@@ -100,8 +100,10 @@ passport.use(new WordpressStrategy({
 ));
 
 app.get('/auth/wordpress',
-  passport.authorize('wordpress-oauth-server'),
+  passport.authenticate('wordpress-oauth-server'),
   function(req, res){
+    console.log('req:', req);
+    console.log('res:', res);
   });
 
 app.get('/auth/wordpress/callback', 
